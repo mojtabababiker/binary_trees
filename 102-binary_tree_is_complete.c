@@ -21,8 +21,6 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 	if (tree == NULL)
 		return (0);
 	height = get_height(tree) - 1;
-
-	printf("\t[[[[[ hieght = %d]]]]]\n", height);
 	complete_tree = is_complete(tree, height - 1);
 	return (complete_tree);
 }
