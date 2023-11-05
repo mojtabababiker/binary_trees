@@ -66,7 +66,10 @@ int is_complete(const binary_tree_t *tree, size_t height)
 	}
 	else if (!tree->left && tree->right)
 		return (0);
-
+	else if (tree->left && !tree->right)
+		return (0);
+	else if (!tree->left && !tree->right)
+		return (0);
 	return (is_complete(tree->left, height - 1) *
 		is_complete(tree->right, height - 1));
 }
