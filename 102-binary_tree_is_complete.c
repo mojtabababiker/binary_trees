@@ -1,7 +1,7 @@
 #include "binary_trees.h"
 
-size_t get_height(const binary_tree_t *tree);
-int is_complete(const binary_tree_t *tree, size_t height);
+int get_height(const binary_tree_t *tree);
+int is_complete(const binary_tree_t *tree, int height);
 
 /**
  * binary_tree_is_complete - check if the tree is complete tree
@@ -16,12 +16,13 @@ int is_complete(const binary_tree_t *tree, size_t height);
 int binary_tree_is_complete(const binary_tree_t *tree)
 {
 	int complete_tree;
-	size_t height;
+	int height;
 
 	if (tree == NULL)
 		return (0);
 	height = get_height(tree) - 1;
 
+	printf("\t[[[[[ hieght = %d]]]]]\n", height);
 	complete_tree = is_complete(tree, height - 1);
 	return (complete_tree);
 }
@@ -31,9 +32,9 @@ int binary_tree_is_complete(const binary_tree_t *tree)
  * @tree: the root node of the tree
  * Return: the height if the tree
  */
-size_t get_height(const binary_tree_t *tree)
+int get_height(const binary_tree_t *tree)
 {
-	size_t l_height = 0, r_height = 0;
+	int l_height = 0, r_height = 0;
 
 	if (tree == NULL)
 		return (0);
@@ -53,7 +54,7 @@ size_t get_height(const binary_tree_t *tree)
  * @height: the height of the tree
  * Return: 1 if the tree is complete 0 other-wise
  */
-int is_complete(const binary_tree_t *tree, size_t height)
+int is_complete(const binary_tree_t *tree, int height)
 {
 	if (tree == NULL)
 		return (0);
