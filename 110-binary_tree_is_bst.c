@@ -97,9 +97,8 @@ int check_right(binary_tree_t *tree, int root_val)
 	/* if left val is > tree value or right value is < tree value */
 	if (l_node->n > tree->n || r_node->n < tree->n)
 		return (0);
-
 	if (l_node->n < root_val)
 		return (0);
 	/* recursivly call for the function to check all the sub-trees */
-	return (check_left(l_node, root_val) * check_left(r_node, root_val));
+	return (check_right(l_node, root_val) * check_right(r_node, root_val));
 }
