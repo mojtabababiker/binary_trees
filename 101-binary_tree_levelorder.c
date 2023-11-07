@@ -22,7 +22,7 @@ void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
 		return;
 
 	/* printf("%d the temp\n", temp->node->n); */
-	while(q)
+	while (q)
 	{
 		temp = dequeue(&q);
 		(*func)(temp->node->n);
