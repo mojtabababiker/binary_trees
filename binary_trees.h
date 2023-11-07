@@ -35,10 +35,9 @@ typedef struct binary_tree_s heap_t;
 
 /* helper struct [queue] for task 101 */
 /**
- * struct binary_tree_s - Binary tree node
+ * struct queue_s - a queue structure
  * @node: pointer to the binary_tree_t node
  * @next: Pointer to the next child queue node
- * @back: the last node on the queue
  */
 
 typedef struct queue_s
