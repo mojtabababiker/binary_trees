@@ -1,19 +1,5 @@
 #include "binary_trees.h"
 
-/**
- * struct binary_tree_s - Binary tree node
- * @node: pointer to the binary_tree_t node
- * @next: Pointer to the next child queue node
- * @back: the last node on the queue
- */
-
-typedef struct queue_s
-{
-	binary_tree_t *node;
-	struct queue_s *next;
-} queue;
-
-
 queue *enqueue(queue **q, binary_tree_t *crnt_node);
 queue *dequeue(queue **q);
 

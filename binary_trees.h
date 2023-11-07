@@ -9,7 +9,7 @@
 /**
  * struct binary_tree_s - Binary tree node
  *
-n * @n: Integer stored in the node
+ * @n: Integer stored in the node
  * @parent: Pointer to the parent node
  * @left: Pointer to the left child node
  * @right: Pointer to the right child node
@@ -24,7 +24,7 @@ struct binary_tree_s
 
 typedef struct binary_tree_s binary_tree_t;
 
-/* for the BTS */
+/* for the BST */
 typedef struct binary_tree_s bst_t;
 
 /* for AVL tree */
@@ -32,6 +32,20 @@ typedef struct binary_tree_s avl_t;
 
 /* for max binary heap */
 typedef struct binary_tree_s heap_t;
+
+/* helper struct [queue] for task 101 */
+/**
+ * struct binary_tree_s - Binary tree node
+ * @node: pointer to the binary_tree_t node
+ * @next: Pointer to the next child queue node
+ * @back: the last node on the queue
+ */
+
+typedef struct queue_s
+{
+	binary_tree_t *node;
+	struct queue_s *next;
+} queue;
 
 /* helper functions */
 void binary_tree_print(const binary_tree_t *tree);
