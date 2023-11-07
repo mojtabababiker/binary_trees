@@ -134,6 +134,7 @@ bst_t *get_sucs(bst_t *tree)
 /**
  * delete_full_node - delete node with both left and right sub-trees from BST
  * @node: pointer to the node to be deleted
+ * Return: pointer to the replaced node, or NULL
  */
 bst_t *delete_full_node(bst_t *node)
 {

@@ -9,8 +9,8 @@ int check_right(binary_tree_t *tree, int root_val);
  * Return: 1 if the tree is BST 0 other-wise
  * Description:
  *        Binary Search Tree is a binary in wich the left node if less than the
- *        current node, and the right node is greater than the current node, and
- *        all the sub-tree of the node are a binary search tree
+ *        current node, and the right node is greater than the current node,
+ *        and all the sub-tree of the node are a binary search tree
  */
 
 int binary_tree_is_bst(const binary_tree_t *tree)
@@ -51,7 +51,7 @@ int check_left(binary_tree_t *tree, int root_val)
 		return (1);
 	}
 	/* if the left tree value is < tree value and the right tree is null */
-	if(l_node->n < tree->n && !r_node)
+	if (l_node->n < tree->n && !r_node)
 		return (1);
 	/* if left val is > tree value or right value is < tree value */
 	if (l_node->n > tree->n || r_node->n < tree->n)
@@ -87,7 +87,7 @@ int check_right(binary_tree_t *tree, int root_val)
 		return (1);
 
 	/* if the left tree value is < tree value and the right tree is null */
-	if(l_node->n < tree->n && !r_node)
+	if (l_node->n < tree->n && !r_node)
 	{
 		if (l_node->n < root_val)
 			return (0);
