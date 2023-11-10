@@ -36,6 +36,9 @@ int is_binary_search_tree(const binary_tree_t *tree)
 	if (tree->right)
 		min_right = get_min(tree->right);
 
+	is_bst = is_binary_search_tree(tree->left) *
+		is_binary_search_tree(tree->right);
+
 	/* the root value of the subtree should be less than all it's */
 	/* + right siplings values, and greater than all it's left */
 	/* + siplings values, if NOT then return zero */
@@ -44,8 +47,6 @@ int is_binary_search_tree(const binary_tree_t *tree)
 	if (min_right && tree->n > min_right->n)
 			return (0);
 
-	is_bst = is_binary_search_tree(tree->left) *
-		is_binary_search_tree(tree->right);
 	return (is_bst);
 }
 
