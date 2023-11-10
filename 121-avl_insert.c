@@ -40,7 +40,7 @@ avl_t *avl_insert(avl_t **tree, int value)
 	else
 		parent->right = new;
 
-	while (parent)
+	while (parent != NULL)
 	{
 		balance_factor = binary_tree_balance(parent);
 		if (balance_factor > 1)
@@ -48,16 +48,17 @@ avl_t *avl_insert(avl_t **tree, int value)
 			if (new->n > new->parent->n)
 				binary_tree_rotate_left(new->parent);
 			temp = binary_tree_rotate_right(parent);
-			break;
+			parent = new;
 		}
 		else if (balance_factor < -1)
 		{
 			if (new->n < new->parent->n)
 				binary_tree_rotate_right(new->parent);
 			temp = binary_tree_rotate_left(parent);
-			break;
+			parent = new;
 		}
-		parent = parent->parent;
+		else
+			parent = parent->parent;
 	}
 
 	return (new);
