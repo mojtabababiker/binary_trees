@@ -16,7 +16,7 @@ avl_t *avl_insert(avl_t **tree, int value)
 
 	if (*tree == NULL)
 	{
-		*tree = (create(value));
+		*tree = create(value);
 		return (*tree);
 	}
 
@@ -32,6 +32,8 @@ avl_t *avl_insert(avl_t **tree, int value)
 			temp = temp->right;
 	}
 	new = create(value);
+	if (!new)
+		return (NULL);
 	new->parent = parent;
 	if (parent->n > value)
 		parent->left = new;
