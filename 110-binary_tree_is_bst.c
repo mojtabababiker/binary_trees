@@ -43,9 +43,9 @@ int is_binary_search_tree(const binary_tree_t *tree)
 	/* + right siplings values, and greater than all it's left */
 	/* + siplings values, if NOT then return zero */
 	if (max_left && tree->n <= max_left->n)
-			return (0);
+		return (0);
 	if (min_right && tree->n >= min_right->n)
-			return (0);
+		return (0);
 
 	return (is_bst);
 }
