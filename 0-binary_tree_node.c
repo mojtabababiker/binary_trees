@@ -38,12 +38,6 @@ binary_tree_t *create(int n)
 
 	if (new == NULL)
 		return (NULL);
-
-	/* new->parent = malloc(sizeof(binary_tree_t)); */
-	/* if (new->parent == NULL) */
-	/* free(new); */
-	/* return (NULL); */
-
 	new->n = n;
 	new->left = NULL;
 	new->right = NULL;
