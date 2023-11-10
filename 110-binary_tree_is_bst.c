@@ -1,104 +1,102 @@
 #include "binary_trees.h"
 
-int check_left(binary_tree_t *tree, int root_val);
-int check_right(binary_tree_t *tree, int root_val);
-
+int is_binary_search_tree(const binary_tree_t *tree);
+binary_tree_t *get_min(binary_tree_t *tree);
+binary_tree_t *get_max(binary_tree_t *tree);
 /**
- * binary_tree_is_bst - check if the tree is binary search tree
- * @tree: a binary tree to check
- * Return: 1 if the tree is BST 0 other-wise
- * Description:
- *        Binary Search Tree is a binary in wich the left node if less than the
- *        current node, and the right node is greater than the current node,
- *        and all the sub-tree of the node are a binary search tree
+ * binary_tree_is_bst - check if the binary tree given is Binary Search Tree
+ * @tree: pointer to the root node of the tree
+ * Return: 1 if the tree is BST, 0 other-wise
  */
-
 int binary_tree_is_bst(const binary_tree_t *tree)
 {
-	binary_tree_t *l_node = NULL, *r_node = NULL;
-
 	if (tree == NULL)
 		return (0);
-	l_node = tree->left;
-	r_node = tree->right;
 
-	return (check_left(l_node, tree->n) * check_right(r_node, tree->n));
+	return (is_binary_search_tree(tree));
 }
 
 /**
- * check_left - check the left sub-tree
- * @tree: the left sub-tree to check
- * @root_val: the value of the root
- * Return: 1 if the sub-tree is BST, 0 other-wise
+ * is_binary_search_tree - check if the binary tree given is Binary Search Tree
+ * @tree: pointer to the root node of the tree
+ * Return: 1 if the tree is BST, 0 other-wise
  */
-int check_left(binary_tree_t *tree, int root_val)
+int is_binary_search_tree(const binary_tree_t *tree)
 {
-	binary_tree_t *l_node = NULL, *r_node = NULL;
+	int is_bst = 0;
+	binary_tree_t *max_left = NULL, *min_right = NULL;
 
 	if (tree == NULL)
 		return (1);
 
-	l_node = tree->left;
-	r_node = tree->right;
-	/* if the tree is a leaf */
-	if (!l_node && !r_node)
+	if (!tree->left && !tree->right)
 		return (1);
-	/* if the left tree is null and the right tree value is > tree value */
-	if (!l_node && r_node->n > tree->n)
-	{
-		if (r_node->n > root_val)
+	if (tree->left)
+		max_left = get_max(tree->left);
+	if (tree->right)
+		min_right = get_min(tree->right);
+
+	/* the root value of the subtree should be less than all it's */
+	/* + right siplings values, and greater than all it's left */
+	/* + siplings values, if NOT then return zero */
+	if (max_left && tree->n < max_left->n)
 			return (0);
-		return (1);
-	}
-	/* if the left tree value is < tree value and the right tree is null */
-	if (l_node->n < tree->n && !r_node)
-		return (1);
-	/* if left val is > tree value or right value is < tree value */
-	if (l_node->n > tree->n || r_node->n < tree->n)
-		return (0);
-	if (r_node->n > root_val)
-		return (0);
-	/* recursivly call for the function to check all the sub-trees */
-	return (check_left(l_node, root_val) * check_left(r_node, root_val));
+	if (min_right && tree->n > min_right->n)
+			return (0);
+
+	is_bst = is_binary_search_tree(tree->left) *
+		is_binary_search_tree(tree->right);
+	return (is_bst);
 }
 
 /**
- * check_right - check the right sub-tree
- * @tree: the left sub-tree to check
- * @root_val: the value of the root
- * Return: 1 if the sub-tree is BST, 0 other-wise
+ * get_min - find the minimum value in the sub-tree
+ * @tree: the root of the sub-tree to check
+ * Return: pointer to the node witth the minimum value, or NULL in failure
  */
-int check_right(binary_tree_t *tree, int root_val)
+binary_tree_t *get_min(binary_tree_t *tree)
 {
-	binary_tree_t *l_node = NULL, *r_node = NULL;
+	binary_tree_t *min_left = NULL, *min_right = NULL, *min = NULL;
 
 	if (tree == NULL)
-		return (1);
+		return (NULL);
 
-	l_node = tree->left;
-	r_node = tree->right;
+	if (!tree->left && !tree->right)
+		return (tree);
 
-	/* if the tree is a leaf */
-	if (!l_node && !r_node)
-		return (1);
+	min = tree;
+	min_left = get_min(tree->left);
+	min_right = get_min(tree->right);
 
-	/* if the left tree is null and the right tree value is > tree value */
-	if (!l_node && r_node->n > tree->n)
-		return (1);
+	if (min_left && min_left->n < min->n)
+		min = min_left;
+	if (min_right && min_right->n < min->n)
+		min = min_right;
+	return (min);
+}
 
-	/* if the left tree value is < tree value and the right tree is null */
-	if (l_node->n < tree->n && !r_node)
-	{
-		if (l_node->n < root_val)
-			return (0);
-		return (1);
-	}
+/**
+ * get_max - find the maximum value in the sub-tree
+ * @tree: the root of the sub-tree to check
+ * Return: pointer to the node witth the maximum value, or NULL in failure
+ */
+binary_tree_t *get_max(binary_tree_t *tree)
+{
+	binary_tree_t *max_left = NULL, *max_right = NULL, *max = NULL;
 
-	/* if left val is > tree value or right value is < tree value */
-	if (l_node->n > tree->n || r_node->n < tree->n)
-		return (0);
-	if (l_node->n < root_val)
-		return (0);
-	/* recursivly call for the function to check all the sub-trees */
-	return (check_right(l_node, root_val) * check_right(r_node, root_val));
+	if (tree == NULL)
+		return (NULL);
+
+	if (!tree->left && !tree->right)
+		return (tree);
+
+	max = tree;
+	max_left = get_max(tree->left);
+	max_right = get_max(tree->right);
+
+	if (max_left && max_left->n > max->n)
+		max = max_left;
+	if (max_right && max_right->n > max->n)
+		max = max_right;
+	return (max);
 }
