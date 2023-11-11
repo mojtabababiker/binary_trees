@@ -20,9 +20,7 @@ avl_t *array_to_avl(int *array, size_t size)
 
 	while (size > 0)
 	{
-		printf(">>> %lu\n", size);
 		avl_insert(&root, *array);
-		printf("\ninserted: %d\n", *array++);
 		size--;
 	}
 	return (root);

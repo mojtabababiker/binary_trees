@@ -1,5 +1,7 @@
 #include "binary_trees.h"
 
+avl_t *avl_balance(avl_t *new);
+
 /**
  * avl-insert - insert a new node into the AVL tree
  * @tree: pointer to the root pointer of the AVL tree
@@ -9,7 +11,6 @@
 avl_t *avl_insert(avl_t **tree, int value)
 {
 	avl_t *new = NULL, *parent = NULL, *temp = NULL;
-	int balance_factor = 0;
 
 	if (tree == NULL)
 		return (NULL);
@@ -40,6 +41,24 @@ avl_t *avl_insert(avl_t **tree, int value)
 	else
 		parent->right = new;
 
+	temp = avl_balance(new);
+	if (temp && temp->parent == NULL) /* the new root */
+		*tree = temp;
+	return (new);
+}
+
+/**
+ * avl_balance - balance an AVL tree
+ * @new: a newly inserted nood that may effict the tree balance
+ * Return: pointer to the new root of the balanced tree
+ */
+avl_t *avl_balance(avl_t *new)
+{
+	int balance_factor = 0, value = 0;
+	avl_t *temp = NULL, *parent = NULL;
+
+	parent = new->parent;
+	value = new->n;
 	while (parent != NULL)
 	{
 		balance_factor = binary_tree_balance(parent);
@@ -62,7 +81,5 @@ avl_t *avl_insert(avl_t **tree, int value)
 		parent = parent->parent;
 
 	}
-	if (temp && temp->parent == NULL) /* the new root */
-		*tree = temp;
-	return (new);
+	return (temp);
 }
