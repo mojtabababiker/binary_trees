@@ -1,3 +1,4 @@
+
 #include "binary_trees.h"
 
 /**
@@ -47,6 +48,7 @@ avl_t *avl_insert(avl_t **tree, int value)
 		{
 			if (new->n > new->parent->n)
 				binary_tree_rotate_left(new->parent);
+
 			temp = binary_tree_rotate_right(parent);
 			parent = new;
 		}
@@ -54,12 +56,13 @@ avl_t *avl_insert(avl_t **tree, int value)
 		{
 			if (new->n < new->parent->n)
 				binary_tree_rotate_right(new->parent);
+
 			temp = binary_tree_rotate_left(parent);
 			parent = new;
 		}
-		else
-			parent = parent->parent;
-	}
-
+		parent = parent->parent;
+		}
+	if (temp && temp->parent == NULL) /* the new root */
+		*tree = temp;
 	return (new);
 }
