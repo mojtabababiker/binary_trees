@@ -3,7 +3,7 @@
 avl_t *avl_balance(avl_t *new);
 
 /**
- * avl-insert - insert a new node into the AVL tree
+ * avl_xinsert - insert a new node into the AVL tree
  * @tree: pointer to the root pointer of the AVL tree
  * @value: the value of the new node
  * Return: a pointer to the newly created node
