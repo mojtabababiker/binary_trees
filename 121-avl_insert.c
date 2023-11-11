@@ -1,4 +1,3 @@
-
 #include "binary_trees.h"
 
 /**
@@ -46,22 +45,23 @@ avl_t *avl_insert(avl_t **tree, int value)
 		balance_factor = binary_tree_balance(parent);
 		if (balance_factor > 1)
 		{
-			if (new->n > new->parent->n)
-				binary_tree_rotate_left(new->parent);
+			if (value > parent->left->n)
+				binary_tree_rotate_left(parent->left);
 
 			temp = binary_tree_rotate_right(parent);
 			parent = new;
 		}
 		else if (balance_factor < -1)
 		{
-			if (new->n < new->parent->n)
-				binary_tree_rotate_right(new->parent);
+			if (value < parent->right->n)
+				binary_tree_rotate_right(parent->left);
 
 			temp = binary_tree_rotate_left(parent);
 			parent = new;
 		}
 		parent = parent->parent;
-		}
+
+	}
 	if (temp && temp->parent == NULL) /* the new root */
 		*tree = temp;
 	return (new);
