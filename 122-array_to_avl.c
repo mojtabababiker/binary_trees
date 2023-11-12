@@ -9,19 +9,19 @@
 avl_t *array_to_avl(int *array, size_t size)
 {
 	avl_t *root = NULL;
+	size_t i = 0;
 
 	if (array == NULL)
 		return (NULL);
 
-	root = create(*array++);
+	root = create(array[0]);
 
 	if (root == NULL)
 		return (NULL);
 
-	while (size > 0)
+	for (i = 1 ; i < size ; i++)
 	{
-		avl_insert(&root, *array);
-		size--;
+		avl_insert(&root, array[i]);
 	}
 	return (root);
 }
