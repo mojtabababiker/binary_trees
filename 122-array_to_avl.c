@@ -14,7 +14,7 @@ avl_t *array_to_avl(int *array, size_t size)
 	if (array == NULL)
 		return (NULL);
 
-	root = create(array[0]);
+	root = (avl_t*)binary_tree_node(NULL, array[0]);
 
 	if (root == NULL)
 		return (NULL);
