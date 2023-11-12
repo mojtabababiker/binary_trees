@@ -122,7 +122,7 @@ avl_t *swap_sucs(avl_t *sucs, avl_t *node)
 
 /**
  * _avl_balance - balance an AVL tree
- * @parent: a newly inserted nood that may effict the tree balance
+ * @node: a newly inserted nood that may effict the tree balance
  * Return: pointer to the new root of the balanced tree
  */
 avl_t *_avl_balance(avl_t *node)
